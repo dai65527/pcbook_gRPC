@@ -21,3 +21,20 @@ https://qiita.com/kitauji/items/bab05cc8215abe8a6431
     // 推奨
 		UpdatedAt: timestamppb.Now(),
 ```
+
+### #9 serializer/json.go func ProtobufToJSON内でのシリアライズ化に使用する関数
+動画では、marshalerとして、protojson.MarshalOptionsを使うとエラーが出る（`cannot use message (type protoreflect.ProtoMessage) as type protoiface.MessageV1 in argument to marshaler.MarshalToString`)。おそらく、protobufの生成したファイルのバージョン違いによるもの。
+こちらのパッケージを使えばOK。`google.golang.org/protobuf/encoding/protojson`。ただし、オプション名と関数名が異なるので注意。以下のようになる。
+
+```
+func ProtobufToJSON(message proto.Message) (string, error) {
+	marshaler := protojson.MarshalOptions{
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+		Indent:          "\t",
+		UseProtoNames:   true,
+	}
+	data, err := marshaler.Marshal(message)
+	return string(data), err
+}
+```
