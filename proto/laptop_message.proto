@@ -18,7 +18,7 @@ message Laptop {
     repeated GPU gpus = 6;
     repeated Storage storages = 7;
     Screen screen = 8;
-    KeyBoard keyboard = 9;
+    Keyboard keyboard = 9;
     oneof weight {
         double weight_kg = 10;
         double weight_lb = 11;

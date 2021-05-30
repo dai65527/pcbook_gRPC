@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "./;pb";
 
-message KeyBoard {
+message Keyboard {
     enum Layout {
         UNKNOWN = 0;
         QWERTY = 2;

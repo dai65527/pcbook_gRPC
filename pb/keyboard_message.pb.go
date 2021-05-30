@@ -20,24 +20,24 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type KeyBoard_Layout int32
+type Keyboard_Layout int32
 
 const (
-	KeyBoard_UNKNOWN KeyBoard_Layout = 0
-	KeyBoard_QWERTY  KeyBoard_Layout = 2
-	KeyBoard_QWERTZ  KeyBoard_Layout = 3
-	KeyBoard_AZERTY  KeyBoard_Layout = 4
+	Keyboard_UNKNOWN Keyboard_Layout = 0
+	Keyboard_QWERTY  Keyboard_Layout = 2
+	Keyboard_QWERTZ  Keyboard_Layout = 3
+	Keyboard_AZERTY  Keyboard_Layout = 4
 )
 
-// Enum value maps for KeyBoard_Layout.
+// Enum value maps for Keyboard_Layout.
 var (
-	KeyBoard_Layout_name = map[int32]string{
+	Keyboard_Layout_name = map[int32]string{
 		0: "UNKNOWN",
 		2: "QWERTY",
 		3: "QWERTZ",
 		4: "AZERTY",
 	}
-	KeyBoard_Layout_value = map[string]int32{
+	Keyboard_Layout_value = map[string]int32{
 		"UNKNOWN": 0,
 		"QWERTY":  2,
 		"QWERTZ":  3,
@@ -45,44 +45,44 @@ var (
 	}
 )
 
-func (x KeyBoard_Layout) Enum() *KeyBoard_Layout {
-	p := new(KeyBoard_Layout)
+func (x Keyboard_Layout) Enum() *Keyboard_Layout {
+	p := new(Keyboard_Layout)
 	*p = x
 	return p
 }
 
-func (x KeyBoard_Layout) String() string {
+func (x Keyboard_Layout) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (KeyBoard_Layout) Descriptor() protoreflect.EnumDescriptor {
+func (Keyboard_Layout) Descriptor() protoreflect.EnumDescriptor {
 	return file_keyboard_message_proto_enumTypes[0].Descriptor()
 }
 
-func (KeyBoard_Layout) Type() protoreflect.EnumType {
+func (Keyboard_Layout) Type() protoreflect.EnumType {
 	return &file_keyboard_message_proto_enumTypes[0]
 }
 
-func (x KeyBoard_Layout) Number() protoreflect.EnumNumber {
+func (x Keyboard_Layout) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use KeyBoard_Layout.Descriptor instead.
-func (KeyBoard_Layout) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use Keyboard_Layout.Descriptor instead.
+func (Keyboard_Layout) EnumDescriptor() ([]byte, []int) {
 	return file_keyboard_message_proto_rawDescGZIP(), []int{0, 0}
 }
 
-type KeyBoard struct {
+type Keyboard struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Layout  KeyBoard_Layout `protobuf:"varint,1,opt,name=layout,proto3,enum=KeyBoard_Layout" json:"layout,omitempty"`
+	Layout  Keyboard_Layout `protobuf:"varint,1,opt,name=layout,proto3,enum=Keyboard_Layout" json:"layout,omitempty"`
 	Backlit bool            `protobuf:"varint,2,opt,name=backlit,proto3" json:"backlit,omitempty"`
 }
 
-func (x *KeyBoard) Reset() {
-	*x = KeyBoard{}
+func (x *Keyboard) Reset() {
+	*x = Keyboard{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_keyboard_message_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -90,13 +90,13 @@ func (x *KeyBoard) Reset() {
 	}
 }
 
-func (x *KeyBoard) String() string {
+func (x *Keyboard) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*KeyBoard) ProtoMessage() {}
+func (*Keyboard) ProtoMessage() {}
 
-func (x *KeyBoard) ProtoReflect() protoreflect.Message {
+func (x *Keyboard) ProtoReflect() protoreflect.Message {
 	mi := &file_keyboard_message_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -108,19 +108,19 @@ func (x *KeyBoard) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use KeyBoard.ProtoReflect.Descriptor instead.
-func (*KeyBoard) Descriptor() ([]byte, []int) {
+// Deprecated: Use Keyboard.ProtoReflect.Descriptor instead.
+func (*Keyboard) Descriptor() ([]byte, []int) {
 	return file_keyboard_message_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *KeyBoard) GetLayout() KeyBoard_Layout {
+func (x *Keyboard) GetLayout() Keyboard_Layout {
 	if x != nil {
 		return x.Layout
 	}
-	return KeyBoard_UNKNOWN
+	return Keyboard_UNKNOWN
 }
 
-func (x *KeyBoard) GetBacklit() bool {
+func (x *Keyboard) GetBacklit() bool {
 	if x != nil {
 		return x.Backlit
 	}
@@ -132,8 +132,8 @@ var File_keyboard_message_proto protoreflect.FileDescriptor
 var file_keyboard_message_proto_rawDesc = []byte{
 	0x0a, 0x16, 0x6b, 0x65, 0x79, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61,
 	0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x89, 0x01, 0x0a, 0x08, 0x4b, 0x65, 0x79,
-	0x42, 0x6f, 0x61, 0x72, 0x64, 0x12, 0x28, 0x0a, 0x06, 0x6c, 0x61, 0x79, 0x6f, 0x75, 0x74, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x10, 0x2e, 0x4b, 0x65, 0x79, 0x42, 0x6f, 0x61, 0x72, 0x64,
+	0x62, 0x6f, 0x61, 0x72, 0x64, 0x12, 0x28, 0x0a, 0x06, 0x6c, 0x61, 0x79, 0x6f, 0x75, 0x74, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x10, 0x2e, 0x4b, 0x65, 0x79, 0x62, 0x6f, 0x61, 0x72, 0x64,
 	0x2e, 0x4c, 0x61, 0x79, 0x6f, 0x75, 0x74, 0x52, 0x06, 0x6c, 0x61, 0x79, 0x6f, 0x75, 0x74, 0x12,
 	0x18, 0x0a, 0x07, 0x62, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08,
 	0x52, 0x07, 0x62, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x74, 0x22, 0x39, 0x0a, 0x06, 0x4c, 0x61, 0x79,
@@ -159,11 +159,11 @@ func file_keyboard_message_proto_rawDescGZIP() []byte {
 var file_keyboard_message_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_keyboard_message_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_keyboard_message_proto_goTypes = []interface{}{
-	(KeyBoard_Layout)(0), // 0: KeyBoard.Layout
-	(*KeyBoard)(nil),     // 1: KeyBoard
+	(Keyboard_Layout)(0), // 0: Keyboard.Layout
+	(*Keyboard)(nil),     // 1: Keyboard
 }
 var file_keyboard_message_proto_depIdxs = []int32{
-	0, // 0: KeyBoard.layout:type_name -> KeyBoard.Layout
+	0, // 0: Keyboard.layout:type_name -> Keyboard.Layout
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -178,7 +178,7 @@ func file_keyboard_message_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_keyboard_message_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*KeyBoard); i {
+			switch v := v.(*Keyboard); i {
 			case 0:
 				return &v.state
 			case 1:
