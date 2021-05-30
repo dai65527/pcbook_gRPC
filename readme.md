@@ -13,3 +13,11 @@ protocによってコードを生成する際に`protoc --proto_path=proto proto
 https://qiita.com/kitauji/items/bab05cc8215abe8a6431
 
 
+### #8 sample/generator.go func NewLaptopのtimestamp生成
+
+```
+    // 非推奨
+		// UpdatedAt:   ptypes.TimestampNow(),
+    // 推奨
+		UpdatedAt: timestamppb.Now(),
+```
