@@ -38,3 +38,62 @@ func ProtobufToJSON(message proto.Message) (string, error) {
 	return string(data), err
 }
 ```
+
+### #10 protocによるservice用コード生成
+これも動画と最新バージョンでは異なる部分があった。
+
+ここまで使ってきたprotocのコマンド`protoc --proto_path=proto proto/*.proto --go_out=pb --go-grpc_out=.`だけでは足りず、`LaptopServiceClient/Server`が定義される`laptop_service_grpc.pb.go`が生成されない。
+オプション`--go-grpc_out=pb`を追加すればOK（`pb`は出力先フォルダ）
+
+まとめると、こうなる（Makefile更新した）
+```
+protoc --proto_path=proto proto/*.proto --go_out=pb --go-grpc_out=pb
+```
+
+ちなみに、
+- helloworld/helloworld.pb.go: メッセージやシリアライズ
+- helloworld/helloworld_grpc.pb.go: gRPCのサーバ/クライアント
+
+です。
+
+### #10 pb.RegisterLaptopServiceServer
+クライアントからテストをしようとする部分、LaptopServiceServerにLaptopServerを登録する以下のコードでエラーがでた。
+
+```go
+func startTestLaptopServer(t *testing.T) (*LaptopServer, string) {
+	laptopServer := NewLaptopServer(NewInMemoryLaptopStore())
+
+	grpcServer := grpc.NewServer()
+	pb.RegisterLaptopServiceServer(grpcServer, laptopServer) // ここでエラー
+	（略）
+}
+```
+
+エラー：`cannot use laptopServer (variable of type *LaptopServer) as pb.LaptopServiceServer value in argument to pb.RegisterLaptopServiceServer: missing method mustEmbedUnimplementedLaptopServiceServer`
+
+これもバージョン違いで、`pb.LaptopServiceServer`インターフェイスに `mustEmbedUnimplementedLaptopServiceServer`メソッドが追加されているから。（future compatibilityのためらしい）
+
+対処法は2つ。
+
+#### 1. `pb.UnimplementedLaptopServiceServer`を追加する（推奨）
+`pb.UnimplementedLaptopServiceServer`に`pb.mustEmbedUnimplementedLaptopServiceServer`実装されているので、これをEmbedすればOKでした。
+
+```
+type LaptopServer struct {
+	Store LaptopStore
+	pb.UnimplementedLaptopServiceServer
+}
+```
+
+#### 2. protocのオプションに`--go-grpc_opt=require_unimplemented_servers=false`を追加する（非推奨）
+protocでコンパイルする際に`--go-grpc_out=require_unimplemented_servers=false`をつける。
+
+```
+protoc --proto_path=proto proto/*.proto --go_out=pb --go-grpc_out=pb \
+       --go-grpc_out=require_unimplemented_servers=false
+```
+
+後方互換性のために用意されているオプションなので新規作成の際は使うべきではない。
+
+参考：https://github.com/grpc/grpc-go/blob/master/cmd/protoc-gen-go-grpc/README.md
+参考：https://note.com/dd_techblog/n/nb8b925d21118
