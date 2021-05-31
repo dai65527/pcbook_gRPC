@@ -99,3 +99,7 @@ func (server *LaptopServer) SearchLaptop(
 
 	return nil
 }
+
+func (server *LaptopServer) UploadImage(stream pb.LaptopService_UploadImageServer) error {
+	return nil
+}
